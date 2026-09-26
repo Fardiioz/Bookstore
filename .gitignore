@@ -1,0 +1,26 @@
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Backend (Laravel)
+backend/bookstore-api/vendor/
+backend/bookstore-api/node_modules/
+backend/bookstore-api/storage/*.key
+backend/bookstore-api/.phpunit.cache
+backend/bookstore-api/public/hot
+
+# Frontend (Nuxt)
+frontend/bookstore-web/node_modules/
+frontend/bookstore-web/.nuxt/
+frontend/bookstore-web/.output/
+frontend/bookstore-web/.data/
+frontend/bookstore-web/.nitro/
+frontend/bookstore-web/.cache/
+frontend/bookstore-web/dist/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

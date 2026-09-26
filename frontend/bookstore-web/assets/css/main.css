@@ -1,0 +1,374 @@
+/* ==========================================================================
+   main.css: desain minimalis untuk toko buku
+   Palet: 27233A (tinta) / 505168 (abu ungu) / B3C0A4 (sage) / EAEFD3 (kertas) / DCC48E (emas)
+   Nama class lama (retro-*, glass-panel, custom-scrollbar) dipertahankan agar
+   komponen yang memakainya tidak rusak, tetapi tampilannya sudah diganti.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --------------------------------------------------------------------------
+   1. Token: mode terang
+   -------------------------------------------------------------------------- */
+:root {
+  --font-body:
+    "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+  --font-display: "Literata", Georgia, "Times New Roman", serif;
+
+  /* permukaan */
+  --bg: #eaefd3;
+  --surface: #f6f8ea;
+  --inset: #eef2da;
+  --border: #cfd7b6;
+  --border-strong: #b3c0a4;
+
+  /* teks */
+  --text: #27233a;
+  --text-2: #3b3852;
+  --muted: #5e6075;
+
+  /* aksi */
+  --primary: #27233a;
+  --primary-hover: #3b3852;
+  --on-primary: #f6f8ea;
+  --accent: #dcc48e;
+  --brand-text: #27233a;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  /* alias untuk nama variabel lama */
+  --retro-bg: var(--bg);
+  --retro-surface: var(--surface);
+  --retro-border: var(--border-strong);
+  --retro-lime: var(--accent);
+  --retro-lavender: #b9b8c9;
+  --retro-peach: #dcc48e;
+  --retro-yellow: #dcc48e;
+  --retro-pink: #c9c3c9;
+  --retro-cyan: #b3c0a4;
+
+  color-scheme: light;
+}
+
+/* --------------------------------------------------------------------------
+   2. Token: mode gelap (class "dark" atau atribut data-theme="dark" pada <html>)
+   -------------------------------------------------------------------------- */
+:root.dark,
+:root[data-theme="dark"] {
+  --bg: #1b1828;
+  --surface: #27233a;
+  --inset: #14121f;
+  --border: #3b3752;
+  --border-strong: #4a4663;
+
+  --text: #eaefd3;
+  --text-2: #cbd2ba;
+  --muted: #a7ada0;
+
+  --primary: #dcc48e;
+  --primary-hover: #e6d3a6;
+  --on-primary: #1b1828;
+  --accent: #dcc48e;
+  --brand-text: #dcc48e;
+
+  color-scheme: dark;
+}
+
+/* --------------------------------------------------------------------------
+   3. Dasar
+   -------------------------------------------------------------------------- */
+@layer base {
+  html {
+    font-family: var(--font-body);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply antialiased;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  h1 {
+    font-weight: 600;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font-family: var(--font-body);
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: #27233a;
+  }
+}
+
+/* fokus keyboard yang jelas, tidak muncul saat klik mouse */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+:root:not(.dark):not([data-theme="dark"]) :focus-visible {
+  outline-color: var(--primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Komponen lama (nama class sama, gaya baru): garis tipis, tanpa bayangan
+   -------------------------------------------------------------------------- */
+.retro-shadow-sm,
+.retro-shadow,
+.retro-shadow-lg {
+  box-shadow: none;
+}
+
+.retro-shadow-hover {
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+.retro-shadow-hover:hover {
+  border-color: var(--border-strong);
+}
+
+.retro-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: none;
+}
+
+.retro-badge {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.retro-btn {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  box-shadow: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.1s ease;
+}
+.retro-btn:hover {
+  border-color: var(--text-2);
+}
+.retro-btn:active {
+  transform: translateY(1px);
+}
+
+.retro-input {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+  background-color: var(--surface);
+  color: var(--text);
+}
+.retro-input:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: var(--primary);
+}
+
+/* panel melayang (navbar, modal, dropdown): permukaan solid, blur tipis */
+.glass-panel {
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
+   5. Bentuk global: hierarki radius, tanpa bayangan
+   -------------------------------------------------------------------------- */
+.rounded-2xl {
+  border-radius: var(--radius-lg);
+}
+
+.rounded-xl {
+  border-radius: var(--radius-md);
+}
+
+.rounded-md {
+  border-radius: var(--radius-sm);
+}
+
+.shadow-xs,
+.shadow-sm,
+.hover\:shadow-sm:hover {
+  box-shadow: none;
+}
+
+/* --------------------------------------------------------------------------
+   6. Jembatan warna untuk komponen yang masih memakai hex hijau dan skala slate
+   Memetakan warna lama ke palet baru tanpa mengedit file .vue.
+   Ke depan, ganti class di komponen dengan var(--...) lalu hapus blok ini.
+   -------------------------------------------------------------------------- */
+
+/* hijau lama menjadi tinta (terang) atau emas (gelap) */
+.bg-\[\#157F1F\] {
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.hover\:bg-\[\#116919\]:hover {
+  background-color: var(--primary-hover);
+}
+
+.text-\[\#157F1F\] {
+  color: var(--brand-text);
+}
+
+.group:hover .group-hover\:text-\[\#157F1F\],
+.group:hover .group-hover\:text-\[\#4CB963\] {
+  color: var(--brand-text);
+}
+
+.focus\:border-\[\#4CB963\]:focus {
+  border-color: var(--accent);
+}
+
+.border-\[\#4CB963\]\/30 {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+/* abu-abu biru lama menjadi abu ungu */
+.text-\[\#5C6784\] {
+  color: var(--muted);
+}
+
+.placeholder-\[\#5C6784\]::placeholder {
+  color: var(--muted);
+}
+
+/* skala terang */
+.bg-white {
+  background-color: #f6f8ea;
+}
+
+.bg-white\/95 {
+  background-color: color-mix(in srgb, #f6f8ea 92%, transparent);
+}
+
+.bg-slate-50 {
+  background-color: #eef2da;
+}
+
+.bg-slate-100 {
+  background-color: #e3e9cb;
+}
+
+.border-slate-100 {
+  border-color: #dde3c4;
+}
+
+.border-slate-200 {
+  border-color: #cfd7b6;
+}
+
+.hover\:border-slate-300:hover {
+  border-color: #b3c0a4;
+}
+
+.text-slate-900,
+.text-slate-800 {
+  color: #27233a;
+}
+
+.text-slate-700 {
+  color: #3b3852;
+}
+
+.text-slate-400 {
+  color: #a3a99c;
+}
+
+/* skala gelap */
+.bg-slate-950 {
+  background-color: #14121f;
+}
+
+.bg-slate-900 {
+  background-color: #27233a;
+}
+
+.bg-slate-800 {
+  background-color: #3b3752;
+}
+
+.border-slate-800 {
+  border-color: #3b3752;
+}
+
+.border-slate-700 {
+  border-color: #4a4663;
+}
+
+.hover\:border-slate-700:hover {
+  border-color: #4a4663;
+}
+
+.text-slate-300 {
+  color: #cbd2ba;
+}
+
+.text-slate-200 {
+  color: #e4e9ce;
+}
+
+.placeholder-slate-500::placeholder {
+  color: #8a8fa0;
+}
