@@ -159,6 +159,6 @@ Dikembangkan oleh **[Fardiioz](https://github.com/Fardiioz)** sebagai bagian dar
 
 ---
 
-## 📄 Lisensi
+##  Lisensi
 
 Proyek ini dibuat untuk keperluan tugas/edukasi.
